@@ -1,0 +1,14 @@
+<nav>
+  <h1 routerLink="/">Angular SHELL</h1>
+  <a routerLink="app2">Angular remote</a>
+  <a routerLink="products">Vue remote</a>
+  <ng-container *ngIf="products$ | async as products">
+    <span *ngIf="productsInCart; else noProducts"
+      >Cart: {{ products | json }}</span
+    >
+    <ng-template #noProducts>
+      <span>0 products in cart</span>
+    </ng-template>
+  </ng-container>
+</nav>
+<router-outlet></router-outlet>
