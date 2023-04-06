@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Microfront End</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="./dist/reveal.css" />
+    <link rel="stylesheet" href="./dist/theme/moon.css" />
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+          <h2>Module federation</h2>
+          <q>
+            Multiple separate builds should form a single application. These
+            separate builds act like containers and can expose and consume code
+            between builds, creating a single, unified application.
+          </q>
+          <aside class="notes">Isomorphic</aside>
+        </section>
+        <section>
+          <h2>Concepts</h2>
+          <img src="assets/concepts.png" />
+          <aside class="notes">
+            <ul>
+              <li>
+                Webpack will provide a file commonly named remoteEntry.js that
+                have the code to init container, init the sharing scope
+                (dependancy versions resolutions) and get the exposed modules.
+              </li>
+
+              <li>
+                Share deps, services, state library as singleton(not
+                recommended, conflicts)
+              </li>
+
+              <li>Host will consume remoteEntry.js & exposed modules</li>
+
+              <li>
+                Remote will expose remoteEntry.js & exposed modules in chunks
+              </li>
+
+              <li>
+                Application can be Host & Remote & standalone in same time.
+                Circle dependancy work as well.
+              </li>
+            </ul>
+          </aside>
+        </section>
+        <section>
+          <h2>Use cases</h2>
+          <ul>
+            <li>Microfrontend</li>
+            <li>Components libs</li>
+            <li>A/B testing</li>
+            <li>
+              Migration legacy, technical dept on framwork version, Mix
+              technologies
+            </li>
+            <li>Decoupling, Boundaries, Build performance.</li>
+          </ul>
+          <aside class="notes">
+            <ul>
+              <li>Microfront end architecture</li>
+              <li>
+                Components libs without the need to pull updates & rebuild in
+                every projects
+              </li>
+              <li>
+                A/B testing, choose dynamically from a back end / a param url
+                which container you import for a feature or a component
+              </li>
+              <li>
+                Migration: Incremental updates for big technical debt issues
+                (framework version, legacy app...)
+              </li>
+              <li>
+                Decoupling, Build performance. Work in isolation & build small
+                chunk of an application
+              </li>
+            </ul>
+          </aside>
+        </section>
+        <section>
+          <h2>Organization</h2>
+          <img src="assets/organization.png" />
+          <aside class="notes">
+            Can reflect intern organization. Team own a domain with features.
+            Can deploy independantly, application is up to date without a
+            rebuild step
+          </aside>
+        </section>
+        <section>
+          <h2>Demo</h2>
+          <ul>
+            <li>Component lib</li>
+            <li>Angular remote</li>
+            <li>Vuejs remote + event bus</li>
+          </ul>
+        </section>
+        <section>
+          <h2>Alternative to webpack Module federation</h2>
+          <ul>
+            <li>Import map native federation</li>
+            <li>Vite federation</li>
+            <li>Sysem JS</li>
+            <li>Frameworks like Single SPA</li>
+          </ul>
+          <p>
+            Webpack provide abstraction to manages deps sharing, init & load
+            modules
+          </p>
+        </section>
+        <section>
+          <h2>Warning</h2>
+          <ul>
+            <li>Security - mainly backend side. => Sign builds</li>
+            <li>Lot of example but poorly documented API</li>
+          </ul>
+        </section>
+        <section>
+          <h2>What's next</h2>
+          <li>Medusa - Freemium, soon multiples open source project ?</li>
+          <li>Module delegation - Use code that host doesn't know in conf</li>
+          <li>
+            Hot prod reload - reload feature or component without reloading
+            application
+          </li>
+          <aside class="notes">
+            <ul>
+              <li>
+                Medusa, manage graph dependancies, choose version / rallback in
+                live from selection
+              </li>
+              <li>
+                Module delegation - Replace promise synthax that do not permit
+                to import something & deal with http - Use code that host
+                doesn't know in config. Fallback management, middleware to check
+                authorization.
+              </li>
+            </ul>
+          </aside>
+        </section>
+        <section>
+          <div>
+            <p>Follow:</p>
+            <img height="180px" src="assets/manfred.png" />
+            <img height="180px" src="assets/zack.png" />
+          </div>
+
+          <iframe
+            src="https://giphy.com/embed/nUSgpi4vHWqDC"
+            width="480"
+            height="360"
+            frameborder="0"
+            class="giphy-embed"
+            allowfullscreen
+          ></iframe>
+        </section>
+      </div>
+    </div>
+
+    <script src="./plugin/notes/notes.js"></script>
+    <script type="module">
+      import Reveal from "./dist/reveal.esm.js";
+      Reveal.initialize({
+        plugins: [RevealNotes],
+      });
+    </script>
+  </body>
+</html>
