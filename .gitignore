@@ -11,4 +11,5 @@ node_modules/
 .sass-cache
 node_modules\.bin
 dist
+!presentation/dist
 .angular
